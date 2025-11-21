@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
+
+#root {
+  max-width: 1440px;
+  /* margin: 0 auto; */
+}
+
+.hero {
+  background-image: url("../src/Images/Hero-background.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.register {
+  background-image: url("../src/Images/register.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
