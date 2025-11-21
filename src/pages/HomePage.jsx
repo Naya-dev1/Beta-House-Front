@@ -15,7 +15,7 @@ const HomePage = () => {
   useEffect(() => {
     const fetchProperties = async () => {
       try {
-        const res = await fetch("http://localhost:4000/api/property");
+        const res = await fetch("https://beta-house-backend-fteb.onrender.com/api/property");
         const data = await res.json();
         console.log("DATA FROM BACKEND:", data);
         setProperties(data.data);

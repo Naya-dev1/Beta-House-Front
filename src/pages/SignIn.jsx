@@ -17,7 +17,7 @@ const SignIn = () => {
     e.preventDefault();
     try {
       await login(formData);
-      navigate("/"); // redirect after login
+      navigate("/"); 
     } catch (error) {
       console.log(error);
     }

@@ -10,35 +10,35 @@ export const AuthProvider = ({ children }) => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
       setUser(JSON.parse(storedUser));
-      console.log("Loaded user from localStorage:", JSON.parse(storedUser)); // <-- Log stored user
+      console.log("Loaded user from localStorage:", JSON.parse(storedUser));
     }
   }, []);
 
   const signup = async (userData) => {
-    console.log("Signup called with data:", userData); // <-- Log form data
+    console.log("Signup called with data:", userData); 
 
     try {
-      const res = await fetch("http://localhost:4000/api/auth/register", {
+      const res = await fetch("https://beta-house-backend-fteb.onrender.com/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(userData),
       });
 
-      console.log("Raw response from server:", res); // <-- Log raw response
+      console.log("Raw response from server:", res); 
 
       const text = await res.text();
-      console.log("Raw response text:", text); // <-- Log raw text before parsing
+      console.log("Raw response text:", text); 
 
       let data;
       try {
-        data = JSON.parse(text); // <-- Attempt to parse JSON manually
+        data = JSON.parse(text); 
       } catch (parseError) {
         console.error("Failed to parse JSON:", parseError);
         toast.error("Server response is not valid JSON");
         throw parseError;
       }
 
-      console.log("Parsed response data:", data); // <-- Log parsed JSON
+      console.log("Parsed response data:", data); 
 
       if (!res.ok) throw new Error(data.message || "Signup failed");
 
@@ -47,7 +47,7 @@ export const AuthProvider = ({ children }) => {
       toast.success("Signup successful!");
       return data.user;
     } catch (error) {
-      console.error("Signup error caught:", error); // <-- Log any error
+      console.error("Signup error caught:", error); 
       toast.error(error.message);
       throw error;
     }
@@ -57,7 +57,7 @@ export const AuthProvider = ({ children }) => {
     console.log("Login called with credentials:", credentials);
 
     try {
-      const res = await fetch("http://localhost:4000/api/auth/login", {
+      const res = await fetch("https://beta-house-backend-fteb.onrender.com/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(credentials),
@@ -91,7 +91,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
-    console.log("Logging out user:", user); // <-- Log logout
+    console.log("Logging out user:", user); 
     setUser(null);
     localStorage.removeItem("user");
     toast.success("Logged out successfully!");
