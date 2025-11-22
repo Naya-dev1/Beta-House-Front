@@ -96,8 +96,7 @@ const HomePage = () => {
         properties={
           filteredProperties.length > 0 ? filteredProperties : properties
         }
-        // favourites={user?.favourites || []}
-        // onToggleFavourite={toggleFavourite}
+        
         currentPage={currentPage}
         totalPages={totalPages}
         onPageChange={handlePageChange}

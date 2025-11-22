@@ -322,17 +322,15 @@ const MainHome = ({
           onClick={closeModal}
         >
           <div
-            className="bg-white rounded-lg p-6 w-[800px] max-w-full max-h-[90%] overflow-auto relative"
-            onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
+            className="bg-white rounded-lg p-6 lg:w-[800px] sm:w-[600px] w-[380px] max-w-full max-h-[90%] overflow-auto relative"
+            onClick={(e) => e.stopPropagation()} 
           >
-            {/* Close Button */}
             <div className="flex justify-end items-end mb-4">
               <button className=" font-bold " onClick={closeModal}>
-                <IoMdClose className="text-2xl" />
+                <IoMdClose className="text-2xl cursor-pointer" />
               </button>
             </div>
 
-            {/* Gallery */}
             {modalContent.type === "gallery" && (
               <div className="grid grid-cols-2 gap-2">
                 {modalContent.data.map((img, idx) => (
@@ -346,7 +344,6 @@ const MainHome = ({
               </div>
             )}
 
-            {/* Video */}
             {modalContent.type === "video" && (
               <div className="w-full h-[400px]">
                 <iframe
@@ -361,7 +358,6 @@ const MainHome = ({
               </div>
             )}
 
-            {/* Link */}
             {modalContent.type === "link" && (
               <iframe
                 src={modalContent.data}
