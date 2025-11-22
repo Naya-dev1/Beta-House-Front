@@ -14,6 +14,7 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { FaLongArrowAltLeft, FaLongArrowAltRight } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
 import { useAuth } from "../context/AuthContext1";
+import { FaSliders } from "react-icons/fa6";
 
 const MainHome = ({
   properties,
@@ -57,22 +58,34 @@ const MainHome = ({
       : url;
   };
 
+  const scrollLeft = () => {
+    const slider = document.getElementById("popularScroll");
+    slider.scrollLeft -= 300;
+  };
+
+  const scrollRight = () => {
+    const slider = document.getElementById("popularScroll");
+    slider.scrollLeft += 300;
+  };
+
   return (
-    <div className="px-[100px] ">
+    <div className="lg:px-[100px] sm:px-[50px] px-6">
       <div className="mt-[72px] flex justify-between items-center pb-5 ">
-        <div className="flex gap-[29.88px] items-center">
-          <div>
-            {/* <img src="" alt="" /> */}
-            <h5>More Filter</h5>
+        <div className="flex md:flex-row flex-col gap-2  md:gap-[29.88px] md:items-center">
+          <div className="flex gap-1 items-center">
+            <FaSliders className="text-xs"/>{" "}
+            <h5 className="md:text-[16px] text-[12px]">More Filter</h5>
           </div>
 
-          <p>Showing 1 – 10 of 15 results</p>
+          <p className="md:text-[16px] text-[12px]">
+            Showing 1 – 6 of 9 results
+          </p>
         </div>
 
-        <div className="flex items-center gap-[13.66px]">
-          <p>Sort by:</p>
+        <div className="flex items-center md:gap-[13.66px] gap-1">
+          <p className="md:text-[16px] text-[12px]">Sort by:</p>
           <div className="flex items-center gap-[5px]">
-            <h5>Default</h5>
+            <h5 className="md:text-[16px] text-[11px]">Default</h5>
             <IoIosArrowDown />
           </div>
         </div>
@@ -83,7 +96,7 @@ const MainHome = ({
       {properties.length === 0 ? (
         <p className="text-center mt-16">No properties found</p>
       ) : (
-        <div className="grid grid-cols-3 gap-x-[24px] gap-y-[54px]">
+        <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-x-[24px] gap-y-[54px]">
           {properties.map((item) => (
             <div key={item._id} className="">
               <div
@@ -236,133 +249,68 @@ const MainHome = ({
       {/* DISCOVER */}
 
       <div className="pt-[129.44px] relative flex flex-col gap-[72px]">
-        <h2 className="font-semibold text-[#0F1A1E] text-[50px] text-center">
+        <h2 className="font-semibold text-[#0F1A1E] lg:text-[50px]  sm:text-[40px] text-[22px] text-center">
           Discover Our Popular Properties
         </h2>
-        <div className="bg-[#F4F4F4] w-[54px] h-[54px] flex items-center justify-center rounded-[27px] absolute bottom-[180px] left-[-28px] z-50 ">
+        <div
+          onClick={scrollLeft}
+          className="bg-[#F4F4F4] w-[54px] h-[54px] flex items-center justify-center rounded-[27px] absolute bottom-[150px] left-[-28px] z-50 translate-y-[-50%]  cursor-pointer"
+        >
           <FaLongArrowAltLeft className="text-2xl" />
         </div>
-        <div className=" gap-[23px] grid grid-cols-4 relative ">
-          <div className="bg-[url('/public/house.png')] bg-cover bg-center bg-no-repeat h-[412px]  relative rounded-t-[7px]  rounded-b-[4.5px]">
-            <div className="top-[270px] absolute pl-[17px] pt-2 text-white flex flex-col gap-[5px]  bg-[#4A4A4C33]   backdrop-blur-[4px] w-full h-[142px]">
-              <div>
+        <div
+          id="popularScroll"
+          className=" gap-[23px] flex relative overflow-x-auto scroll-smooth no-scrollbar "
+        >
+          {properties.map((item) => (
+            <div
+              key={item._id}
+              className="lg:min-w-[290px] sm:min-w-[270px] min-w-[280px] bg-cover bg-center bg-no-repeat h-[412px]  relative rounded-t-[7px]  rounded-b-[4.5px] "
+              style={{
+                backgroundImage: `url(${
+                  Array.isArray(item.mainImage)
+                    ? item.mainImage[0]
+                    : item.mainImage
+                })`,
+              }}
+            >
+              <div className="top-[270px] absolute pl-[17px] pt-2 text-white flex flex-col gap-[5px]  bg-[#4A4A4C33]   backdrop-blur-[4px] w-full h-[142px]">
                 <div>
-                  <h5 className="text-[18px] font-semibold">
-                    Semi Detached Duplex
-                  </h5>
-                  <div className="flex gap-[3px] items-center">
-                    <FaNairaSign />
-                    <p className="text-[18px] font-semibold ">3,340,000,000</p>
+                  <div className="">
+                    <h5 className="text-[18px] font-semibold">{item.title}</h5>
+                    <div className="flex gap-[3px] items-center">
+                      <FaNairaSign />
+                      <p className="text-[18px] font-semibold ">{item.price}</p>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-[14px] items-center ">
+                    <p className="text-[14px] font-normal">
+                      {item.bedrooms} Bed{" "}
+                    </p>
+                    <p className="text-[14px] font-normal">
+                      {" "}
+                      {item.bathrooms} Bath{" "}
+                    </p>
+                    <p className="text-[14px] font-normal"> 720 sq ft </p>
                   </div>
                 </div>
 
-                <div className="flex gap-[14px] items-center ">
-                  <p className="text-[14px] font-normal">6 Bed </p>
-                  <p className="text-[14px] font-normal"> 3 Bath </p>
-                  <p className="text-[14px] font-normal"> 720 sq ft </p>
+                <div className="flex gap-[11px] items-center ">
+                  <MdLocationPin className="text-[#ffffff] text-l " />
+                  <p className="text-[14px] font-normal">{item.location} </p>
                 </div>
               </div>
-
-              <div className="flex gap-[11px] items-center ">
-                <MdLocationPin className="text-[#ffffff] text-l " />
-                <p className="text-[14px] font-normal">
-                  Victoria Island, Lagos
-                </p>
-              </div>
             </div>
-          </div>
+          ))}
 
           {/*  */}
-
-          <div className="bg-[url('/public/house.png')] bg-cover bg-center bg-no-repeat h-[412px]  relative rounded-t-[7px]  rounded-b-[4.5px]">
-            <div className="top-[270px] absolute pl-[17px] pt-2 text-white flex flex-col gap-[5px]  bg-[#4A4A4C33]   backdrop-blur-[4px] w-full h-[142px]">
-              <div>
-                <div>
-                  <h5 className="text-[18px] font-semibold">
-                    Semi Detached Duplex
-                  </h5>
-                  <div className="flex gap-[3px] items-center">
-                    <FaNairaSign />
-                    <p className="text-[18px] font-semibold ">3,340,000,000</p>
-                  </div>
-                </div>
-
-                <div className="flex gap-[14px] items-center ">
-                  <p className="text-[14px] font-normal">6 Bed </p>
-                  <p className="text-[14px] font-normal"> 3 Bath </p>
-                  <p className="text-[14px] font-normal"> 720 sq ft </p>
-                </div>
-              </div>
-
-              <div className="flex gap-[11px] items-center ">
-                <MdLocationPin className="text-[#ffffff] text-l " />
-                <p className="text-[14px] font-normal">
-                  Victoria Island, Lagos
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-[url('/public/house.png')] bg-cover bg-center bg-no-repeat h-[412px]  relative rounded-t-[7px]  rounded-b-[4.5px]">
-            <div className="top-[270px] absolute pl-[17px] pt-2 text-white flex flex-col gap-[5px]  bg-[#4A4A4C33]   backdrop-blur-[4px] w-full h-[142px]">
-              <div>
-                <div>
-                  <h5 className="text-[18px] font-semibold">
-                    Semi Detached Duplex
-                  </h5>
-                  <div className="flex gap-[3px] items-center">
-                    <FaNairaSign />
-                    <p className="text-[18px] font-semibold ">3,340,000,000</p>
-                  </div>
-                </div>
-
-                <div className="flex gap-[14px] items-center ">
-                  <p className="text-[14px] font-normal">6 Bed </p>
-                  <p className="text-[14px] font-normal"> 3 Bath </p>
-                  <p className="text-[14px] font-normal"> 720 sq ft </p>
-                </div>
-              </div>
-
-              <div className="flex gap-[11px] items-center ">
-                <MdLocationPin className="text-[#ffffff] text-l " />
-                <p className="text-[14px] font-normal">
-                  Victoria Island, Lagos
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-[url('/public/house.png')] bg-cover bg-center bg-no-repeat h-[412px]  relative rounded-t-[7px]  rounded-b-[4.5px]">
-            <div className="top-[270px] absolute pl-[17px] pt-2 text-white flex flex-col gap-[5px]  bg-[#4A4A4C33]   backdrop-blur-[4px] w-full h-[142px]">
-              <div>
-                <div>
-                  <h5 className="text-[18px] font-semibold">
-                    Semi Detached Duplex
-                  </h5>
-                  <div className="flex gap-[3px] items-center">
-                    <FaNairaSign />
-                    <p className="text-[18px] font-semibold ">3,340,000,000</p>
-                  </div>
-                </div>
-
-                <div className="flex gap-[14px] items-center ">
-                  <p className="text-[14px] font-normal">6 Bed </p>
-                  <p className="text-[14px] font-normal"> 3 Bath </p>
-                  <p className="text-[14px] font-normal"> 720 sq ft </p>
-                </div>
-              </div>
-
-              <div className="flex gap-[11px] items-center ">
-                <MdLocationPin className="text-[#ffffff] text-l " />
-                <p className="text-[14px] font-normal">
-                  Victoria Island, Lagos
-                </p>
-              </div>
-            </div>
-          </div>
         </div>
 
-        <div className="bg-[#3D9970] w-[54px] h-[54px] flex items-center justify-center rounded-[27px]  absolute bottom-[170px] right-[-28px] z-50 ">
+        <div
+          onClick={scrollRight}
+          className="bg-[#3D9970] w-[54px] h-[54px] flex items-center justify-center rounded-[27px]  absolute bottom-[170px] right-[-28px] z-50 cursor-pointer in-w-[300px] max-w-[300px]"
+        >
           <FaLongArrowAltRight className="text-2xl" />
         </div>
       </div>

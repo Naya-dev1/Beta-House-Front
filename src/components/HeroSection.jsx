@@ -21,17 +21,19 @@ const HeroSection = ({
   return (
     <div>
       <div className="flex flex-col  mt-[68.24px]">
-        <div className="ml-[229px] mr-[223px] text-white w-[988px] px-[102px] space-y-[24px] text-center ">
-          <h1 className="text-[64px] font-bold ">Browse Our Properties</h1>
-          <p className="text-[26px] font-normal leading-[160%]  ">
+        <div className="lg:ml-[229px] lg:mr-[223px] text-white lg:w-[988px] lg:px-[102px] px-6 space-y-[24px] text-center ">
+          <h1 className="lg:text-[64px] sm:text-[50px] text-[29px] font-bold ">
+            Browse Our Properties
+          </h1>
+          <p className="lg:text-[26px] sm:text-[30px] text-[18px] font-normal leading-[160%]  ">
             Find your perfect home among our curated properties. Start browsing
             now!
           </p>
         </div>
 
-        <div className="bg-[#FFFFFF33] ml-[104px] mr-[98px] mt-[52px] mb-[87px]">
-          <div className="mx-[27px] my-[22px] bg-white flex h-[85.74px] items-center">
-            <div className="ml-[50px]  mr-[90px] flex flex-col  w-[132.84px] relative">
+        <div className="bg-[#FFFFFF33] lg:ml-[104px] lg:mr-[98px] mx-6 mt-[52px] mb-[87px]">
+          <div className="mx-[27px] my-[22px] bg-white flex  md:flex-row flex-col md:h-[85.74px]  gap-5 md:gap-0 items-center pt-4 md:pt-0 rounded-md">
+            <div className="ml-[50px] mr-[50px]  md:mr-[90px] flex flex-col lg:w-[132.84px] w-[80px] relative">
               <label htmlFor="" className="text-[14px] ">
                 LOCATION
               </label>
@@ -40,9 +42,8 @@ const HeroSection = ({
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
                 placeholder="eg. Gbagada"
-                className="placeholder:text-[15px] outline-none"
+                className="md:placeholder:text-[15px] placeholder:text-[14px] outline-none"
                 onClick={() => setLocationOpen(!locationOpen)}
-
               />
 
               {location && filteredLocations.length > 0 && (
@@ -56,16 +57,16 @@ const HeroSection = ({
               )}
             </div>
 
-            <div className="h-[46px] border border-[#CAD4DE]  w-[0px] "></div>
+            <div className="hidden md:block h-[46px] border border-[#CAD4DE]  w-[0px] "></div>
 
-            <div className="flex flex-col items-center w-[179px] ml-[66px] mr-[53px] relative">
+            <div className="flex flex-col items-center lg:w-[179px] w-[100px] ml-[66px] mr-[53px] relative">
               <label className="text-[14px]">PROPERTY TYPE</label>
               <input
                 type="text"
                 readOnly
                 value={propertyType}
                 placeholder="eg. Duplex, Bedroom Flat"
-                className="placeholder:text-[15px] outline-none"
+                className="md:placeholder:text-[15px]  placeholder:text-[14px]  outline-none"
                 onClick={() => setPropertyOpen(!propertyOpen)}
               />
 
@@ -87,9 +88,9 @@ const HeroSection = ({
               )}
             </div>
 
-            <div className="h-[46px] border border-[#CAD4DE]  w-[0px] "></div>
+            <div className="hidden md:block h-[46px] border border-[#CAD4DE]  w-[0px] "></div>
 
-            <div className="flex flex-col items-center gap-[9px] ml-[90px] mr-[90px] w-[104px]">
+            <div className="flex flex-col items-center gap-[9px] ml-[90px] mr-[90px] lg:w-[104px] w-[0px]">
               <label htmlFor="" className="text-[14px] ">
                 BEDROOM
               </label>
@@ -111,7 +112,7 @@ const HeroSection = ({
             </div>
 
             <button
-              className="bg-[#3D9970] h-[85.77px] text-white w-[297px]"
+              className="bg-[#3D9970] md:h-[85.77px] h-[60px] text-white w-[297px] sm:text-[15px]"
               onClick={onSearch}
             >
               Find Property

@@ -10,7 +10,7 @@ const App = () => {
   return (
     <div>
       <AuthProvider>
-        <Toaster position="top-right" />
+        <Toaster position="top-center" />
         <BrowserRouter>
           <Routes>
             <Route path="/sign-up" element={<SignUp />} />

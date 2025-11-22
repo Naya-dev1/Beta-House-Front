@@ -3,7 +3,6 @@ import NavBar from "../components/NavBar";
 import MainHome from "../home/MainHome";
 import HeroSection from "../components/HeroSection";
 import Footer from "../components/Footer";
-import { useAuth } from "../context/AuthContext1";
 import { toast } from "react-hot-toast";
 
 const HomePage = () => {
@@ -15,14 +14,13 @@ const HomePage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(false);
-  // const { user, toggleFavourite } = useAuth();
 
   const fetchProperties = async (page = 1) => {
     setLoading(true);
 
     try {
       const res = await fetch(
-        `https://beta-house-backend-fteb.onrender.com/api/property?page=${page}&limit=9`
+        `https://beta-house-backend-fteb.onrender.com/api/property?page=${page}&limit=6`
       );
       const data = await res.json();
       setProperties(data.data);
@@ -64,43 +62,6 @@ const HomePage = () => {
     setFilteredProperties(results);
   }, [location, propertyType, bedrooms, properties]);
 
-  // ===================
-  // const toggleFavourite = async (propertyId) => {
-  //   if (!user) {
-  //     toast.error("Please login to add favourites");
-  //     return;
-  //   }
-  //   const isFav = favourites.includes(propertyId);
-
-  //   setUser({
-  //     ...user,
-  //     favourites: isFav
-  //       ? (user.favourites || []).filter((id) => id !== propertyId)
-  //       : [...(user.favourites || []), propertyId],
-  //   });
-
-  //   try {
-  //     const url = `https://beta-house-backend-fteb.onrender.com/api/favourite/${propertyId}/${
-  //       isFav ? "delete" : "add"
-  //     }`;
-
-  //     const res = await fetch(url, {
-  //       method: isFav ? "DELETE" : "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //     });
-
-  //     if (!res.ok) throw new Error("Failed to update favourite");
-  //     const data = await res.json();
-
-  //     setUser((prev) => ({ ...prev, favourites: data.data || [] }));
-  //   } catch (err) {
-  //     console.log(err);
-  //     toast.error("Could not update favourites");
-  //   }
-  // };
 
   // =================
 
@@ -148,3 +109,10 @@ const HomePage = () => {
 };
 
 export default HomePage;
+
+
+// https://youtube.com/shorts/sPbZqRF_daw?si=Li6UvxzpJWiUg4Hs
+
+
+
+// white villa https://youtube.com/shorts/XkKlD9gdSfY?si=aEj3aEOk_2n-_9du
