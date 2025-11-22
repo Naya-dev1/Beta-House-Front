@@ -125,7 +125,7 @@ const MainHome = ({
                 <div className="mt-[172px] flex justify-end gap-[22.97px]">
                   {item.virtualTourLink && (
                     <div
-                      className="w-[41.35px] h-[41.35px] bg-[#878787B2] rounded-[9.19px] flex justify-center pt-[11.49px]"
+                      className="w-[41.35px] h-[41.35px] bg-[#878787B2] rounded-[9.19px] flex justify-center pt-[11.49px] cursor-pointer"
                       onClick={() => openModal("link", item.virtualTourLink)}
                     >
                       <IoIosLink className="text-xl  text-[#FFFFFF] " />
@@ -133,7 +133,7 @@ const MainHome = ({
                   )}
                   {item.videoLink && (
                     <div
-                      className="w-[41.35px] h-[41.35px] bg-[#878787B2] rounded-[9.19px] flex justify-center pt-[11.49px]"
+                      className="w-[41.35px] h-[41.35px] bg-[#878787B2] rounded-[9.19px] flex justify-center pt-[11.49px] cursor-pointer"
                       onClick={() => openModal("video", item.videoLink)}
                     >
                       <FaVideo className="text-xl  text-[#FFFFFF] " />
@@ -141,7 +141,7 @@ const MainHome = ({
                   )}
                   {item.gallery && item.gallery.length > 0 && (
                     <div
-                      className="w-[41.35px] h-[41.35px] bg-[#878787B2] rounded-[9.19px] flex justify-center pt-[11.49px]"
+                      className="w-[41.35px] h-[41.35px] bg-[#878787B2] rounded-[9.19px] flex justify-center pt-[11.49px] cursor-pointer"
                       onClick={() => openModal("gallery", item.gallery)}
                     >
                       <CiImageOn className="text-xl  text-[#FFFFFF] " />
@@ -170,7 +170,7 @@ const MainHome = ({
                   <div className="flex gap-[28px] items-center mt-[23px]">
                     <div className="flex gap-[9px] items-center">
                       <IoBedOutline className="text-[#696969] text-2xl" />
-                      <p className="text-[16px] text-[#666666] font-normal">
+                      <p className="md:text-[16px] text-[14px] text-[#666666] font-normal">
                         {item.bedrooms} Bedrooms
                       </p>
                     </div>
