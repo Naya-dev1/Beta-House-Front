@@ -322,7 +322,7 @@ const MainHome = ({
           onClick={closeModal}
         >
           <div
-            className="bg-white rounded-lg p-6 lg:w-[800px] sm:w-[600px] w-[380px] max-w-full max-h-[90%] overflow-auto relative"
+            className="bg-white rounded-lg p-6 lg:w-[800px] sm:w-[600px] w-[380px]  max-h-[90%] overflow-auto relative"
             onClick={(e) => e.stopPropagation()} 
           >
             <div className="flex justify-end items-end mb-4">

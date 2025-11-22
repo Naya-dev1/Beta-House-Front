@@ -112,7 +112,7 @@ const HeroSection = ({
             </div>
 
             <button
-              className="bg-[#3D9970] md:h-[85.77px] h-[60px] text-white w-[297px] sm:text-[15px]"
+              className="bg-[#3D9970] md:h-[85.77px] h-[60px] text-white md:w-[297px] w-full sm:text-[15px]"
               onClick={onSearch}
             >
               Find Property
