@@ -10,16 +10,21 @@ const SignIn = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({ email: "", password: "" });
 
+  const [loading, setLoading] = useState(false);
+
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       await login(formData);
-      navigate("/"); 
+      navigate("/");
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -102,7 +107,7 @@ const SignIn = () => {
               type="submit"
               className="  md:text-[22px] text-[18px] text-[#FFFFFF] "
             >
-              Sign in
+              {loading ? "Signing in..." : "Sign In"}
             </button>
           </div>
         </form>

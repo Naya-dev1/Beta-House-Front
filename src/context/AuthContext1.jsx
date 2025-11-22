@@ -5,49 +5,48 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [token, setToken] = useState(null);
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-      console.log("Loaded user from localStorage:", JSON.parse(storedUser));
-    }
+    const storedToken = localStorage.getItem("token");
+
+    if (storedUser) setUser(JSON.parse(storedUser));
+
+    if (storedToken) setToken(storedToken);
   }, []);
 
   const signup = async (userData) => {
-    console.log("Signup called with data:", userData); 
+    console.log("Signup called with:", userData);
 
     try {
-      const res = await fetch("https://beta-house-backend-fteb.onrender.com/api/auth/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(userData),
-      });
+      const res = await fetch(
+        "https://beta-house-backend-fteb.onrender.com/api/auth/register",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(userData),
+        }
+      );
 
-      console.log("Raw response from server:", res); 
+      const data = await res.json();
+      console.log("Parsed signup response:", data);
 
-      const text = await res.text();
-      console.log("Raw response text:", text); 
-
-      let data;
-      try {
-        data = JSON.parse(text); 
-      } catch (parseError) {
-        console.error("Failed to parse JSON:", parseError);
-        toast.error("Server response is not valid JSON");
-        throw parseError;
+      if (!res.ok) {
+        throw new Error(data.message || "Signup failed");
       }
 
-      console.log("Parsed response data:", data); 
+      const { user, token } = data.data;
 
-      if (!res.ok) throw new Error(data.message || "Signup failed");
+      setUser(user);
+      setToken(token);
+      localStorage.setItem("user", JSON.stringify(user));
+      localStorage.setItem("token", token);
 
-      setUser(data.user);
-      localStorage.setItem("user", JSON.stringify(data.user));
       toast.success("Signup successful!");
-      return data.user;
+      return user;
     } catch (error) {
-      console.error("Signup error caught:", error); 
+      console.error("Signup error:", error);
       toast.error(error.message);
       throw error;
     }
@@ -57,48 +56,94 @@ export const AuthProvider = ({ children }) => {
     console.log("Login called with credentials:", credentials);
 
     try {
-      const res = await fetch("https://beta-house-backend-fteb.onrender.com/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(credentials),
-      });
+      const res = await fetch(
+        "https://beta-house-backend-fteb.onrender.com/api/auth/login",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(credentials),
+        }
+      );
 
       console.log("Raw login response:", res);
 
       const text = await res.text();
-      console.log("Raw login text:", text);
+      const data = JSON.parse(text);
 
-      let data;
-      try {
-        data = JSON.parse(text);
-      } catch (parseError) {
-        console.error("Failed to parse login JSON:", parseError);
-        toast.error("Server response is not valid JSON");
-        throw parseError;
-      }
+      console.log("Raw login text:", text);
 
       if (!res.ok) throw new Error(data.message || "Login failed");
 
-      setUser(data.user);
-      localStorage.setItem("user", JSON.stringify(data.user));
+      setUser(data.data.user);
+      setToken(data.data.token);
+
+      localStorage.setItem("user", JSON.stringify(data.data.user));
+      localStorage.setItem("token", data.data.token);
+
       toast.success("Login successful!");
-      return data.user;
+      return data.data.user;
     } catch (error) {
-      console.error("Login error caught:", error);
+      console.error("Login error:", error);
       toast.error(error.message);
       throw error;
     }
   };
 
   const logout = () => {
-    console.log("Logging out user:", user); 
+    console.log("Logging out user:", user);
     setUser(null);
+    setToken(null);
+
     localStorage.removeItem("user");
+    localStorage.removeItem("token");
+
     toast.success("Logged out successfully!");
   };
 
+  const toggleFavourite = async (propertyId) => {
+    if (!user) {
+      toast.error("Please login to add favourites");
+      return;
+    }
+
+    const isFav = (user.favourites || []).includes(propertyId);
+
+    try {
+      const url = `https://beta-house-backend-fteb.onrender.com/api/favourite/${propertyId}/${
+        isFav ? "delete" : "add"
+      }`;
+
+      const res = await fetch(url, {
+        method: isFav ? "DELETE" : "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (!res.ok) {
+        const errData = await res.json();
+        throw new Error(errData.message || "Failed to update favourite");
+      }
+
+      const data = await res.json();
+
+      setUser((prev) => ({
+        ...prev,
+        favourites: data.data || [],
+      }));
+
+      toast.success(isFav ? "Removed from favourites" : "Added to favourites");
+    } catch (err) {
+      console.log(err);
+      toast.error(err.message || "Could not update favourites");
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ user, signup, login, logout }}>
+    <AuthContext.Provider
+      value={{ user, setUser, token, signup, login, logout, toggleFavourite }}
+    >
       {children}
     </AuthContext.Provider>
   );

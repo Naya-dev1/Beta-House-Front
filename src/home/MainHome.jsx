@@ -9,13 +9,37 @@ import bath from "../Images/bath.png";
 import { FaNairaSign } from "react-icons/fa6";
 import { LuArrowRightLeft } from "react-icons/lu";
 import { IoShareSocial } from "react-icons/io5";
-import { AiOutlineHeart } from "react-icons/ai";
+import { FaHeart } from "react-icons/fa";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { FaLongArrowAltLeft, FaLongArrowAltRight } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
+import { useAuth } from "../context/AuthContext1";
 
-const MainHome = ({ properties }) => {
+const MainHome = ({
+  properties,
+  currentPage,
+  totalPages,
+  onPageChange,
+  loading,
+}) => {
+  if (loading) return <p className="text-center mt-16">Loading...</p>;
+
+  const { user, toggleFavourite } = useAuth();
+
+  const [updatingFavs, setUpdatingFavs] = useState([]);
+
   const [modalContent, setModalContent] = useState(null);
+
+  const handleFavouriteClick = async (propertyId) => {
+    if (updatingFavs.includes(propertyId)) return;
+    setUpdatingFavs((prev) => [...prev, propertyId]);
+
+    try {
+      await toggleFavourite(propertyId);
+    } finally {
+      setUpdatingFavs((prev) => prev.filter((id) => id !== propertyId));
+    }
+  };
 
   const openModal = (type, data) => {
     setModalContent({ type, data });
@@ -38,7 +62,7 @@ const MainHome = ({ properties }) => {
       <div className="mt-[72px] flex justify-between items-center pb-5 ">
         <div className="flex gap-[29.88px] items-center">
           <div>
-            <img src="" alt="" />
+            {/* <img src="" alt="" /> */}
             <h5>More Filter</h5>
           </div>
 
@@ -57,9 +81,9 @@ const MainHome = ({ properties }) => {
       {/* ============================== */}
 
       {properties.length === 0 ? (
-        <p>No properties found</p>
+        <p className="text-center mt-16">No properties found</p>
       ) : (
-        <div className="grid grid-cols-3 gap-x-[24px] ga-y-[54px]">
+        <div className="grid grid-cols-3 gap-x-[24px] gap-y-[54px]">
           {properties.map((item) => (
             <div key={item._id} className="">
               <div
@@ -158,26 +182,55 @@ const MainHome = ({ properties }) => {
                   <div className="flex gap-[25.84px] items-center pt-[3.45px] pr-[5.74px]">
                     <LuArrowRightLeft className="text-xl text-[#484848]" />
                     <IoShareSocial className="text-xl text-[#484848]" />
-                    <AiOutlineHeart className="text-xl text-[#484848]" />
+                    <button onClick={() => handleFavouriteClick(item._id)}>
+                      <FaHeart
+                        className={`text-xl transition-colors duration-300 ${
+                          (user?.favourites || []).includes(item._id)
+                            ? "text-[#FF0000]"
+                            : "text-[#484848]"
+                        } ${
+                          updatingFavs.includes(item._id)
+                            ? "opacity-50 animate-pulse"
+                            : ""
+                        }`}
+                      />
+                    </button>
                   </div>
                 </div>
               </div>
             </div>
           ))}
-
           {/* 1 */}
         </div>
       )}
 
       <div className="flex justify-center mt-[63px] gap-[15px] items-center">
-        <FaChevronLeft className="text-[#60697A75]  text-xl rounded-[3px]" />
-        <p className="px-[10px] py-[2px] text-[#FFFFFF] text-[22.37px] bg-[#3D9970] rounded-[3px]">
-          1
-        </p>
-        <p className="px-[10px] py-[2px]  text-[22.37px] rounded-[3px]">2</p>
-        <p className="px-[10px] py-[2px]  text-[22.37px] rounded-[3px]">3</p>
-        <p className="px-[10px] py-[2px]  text-[22.37px] rounded-[3px]">4</p>
-        <FaChevronRight className="text-[#60697A75]  text-xl rounded-[3px]" />
+        <button
+          onClick={() => onPageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+          className="p-2 border rounded disabled:opacity-50"
+        >
+          <FaChevronLeft className="text-[#60697A75]  text-xl rounded-[3px]" />
+        </button>
+        {Array.from({ length: totalPages }, (_, i) => i + 1).map((num) => (
+          <button
+            key={num}
+            onClick={() => onPageChange(num)}
+            className={`px-3 py-1 rounded ${
+              num === currentPage ? "bg-green-500 text-white" : "bg-gray-200"
+            }`}
+          >
+            {num}
+          </button>
+        ))}
+
+        <button
+          onClick={() => onPageChange(currentPage + 1)}
+          disabled={currentPage === totalPages}
+          className="p-2 border rounded disabled:opacity-50"
+        >
+          <FaChevronRight className="text-[#60697A75]  text-xl rounded-[3px]" />
+        </button>
       </div>
 
       {/* DISCOVER */}
