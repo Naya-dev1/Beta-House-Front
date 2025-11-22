@@ -73,7 +73,7 @@ const MainHome = ({
       <div className="mt-[72px] flex justify-between items-center pb-5 ">
         <div className="flex md:flex-row flex-col gap-2  md:gap-[29.88px] md:items-center">
           <div className="flex gap-1 items-center">
-            <FaSliders className="text-xs"/>{" "}
+            <FaSliders className="text-xs" />{" "}
             <h5 className="md:text-[16px] text-[12px]">More Filter</h5>
           </div>
 
@@ -265,7 +265,7 @@ const MainHome = ({
           {properties.map((item) => (
             <div
               key={item._id}
-              className="lg:min-w-[290px] sm:min-w-[270px] min-w-[280px] bg-cover bg-center bg-no-repeat h-[412px]  relative rounded-t-[7px]  rounded-b-[4.5px] "
+              className="lg:min-w-[290px] sm:min-w-[260px] min-w-[240px] bg-cover bg-center bg-no-repeat h-[412px]  relative rounded-t-[7px]  rounded-b-[4.5px] "
               style={{
                 backgroundImage: `url(${
                   Array.isArray(item.mainImage)
@@ -323,7 +323,7 @@ const MainHome = ({
         >
           <div
             className="bg-white rounded-lg p-6 lg:w-[800px] sm:w-[600px] w-[380px]  max-h-[90%] overflow-auto relative"
-            onClick={(e) => e.stopPropagation()} 
+            onClick={(e) => e.stopPropagation()}
           >
             <div className="flex justify-end items-end mb-4">
               <button className=" font-bold " onClick={closeModal}>
