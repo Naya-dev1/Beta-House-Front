@@ -115,3 +115,16 @@ export default HomePage;
 
 
 // white villa https://youtube.com/shorts/XkKlD9gdSfY?si=aEj3aEOk_2n-_9du
+
+
+// duplex https://youtube.com/shorts/SsEcO9fnTNk?si=nCMP5p-TROz0yZSI
+
+
+// https://youtube.com/shorts/XtGycXlASI0?si=npTR-vJBJoTR8fjO
+
+
+// white house https://youtube.com/shorts/MEFaRCQjuMI?si=xG26a9D3WMkytIG4
+
+// https://youtube.com/shorts/VtBXEOJA2rY?si=RjqdH10a-15pcINH
+
+// shortlet apart ment https://youtube.com/shorts/YId2egoKbfY?si=9dLNhebabcgMbIOZ

@@ -78,7 +78,7 @@ const MainHome = ({
           </div>
 
           <p className="md:text-[16px] text-[12px]">
-            Showing 1 – 6 of 9 results
+            Showing 1 – 6 of 17 results
           </p>
         </div>
 
@@ -153,7 +153,7 @@ const MainHome = ({
               <div className="px-[22.98px] space-y-[32px] border border-[#DDD8D8] pt-[21.88px] pb-[31.63px] rounded-b-[9.17px]">
                 <div>
                   <div className="space-y-[9px]">
-                    <h4 className="text-[#666666] font-semibold text-[20.98px]">
+                    <h4 className="text-[#666666] font-semibold text-[20.98px] sm:text-[18px]">
                       {" "}
                       {item.title}
                     </h4>
@@ -167,17 +167,17 @@ const MainHome = ({
 
                   {/*  */}
 
-                  <div className="flex gap-[28px] items-center mt-[23px]">
+                  <div className="flex gap-[28px] sm:gap-3 items-center mt-[23px]">
                     <div className="flex gap-[9px] items-center">
                       <IoBedOutline className="text-[#696969] text-2xl" />
-                      <p className="md:text-[16px] text-[14px] text-[#666666] font-normal">
+                      <p className="md:text-[16px] text-[14px] sm:text-[13.5px] text-[#666666] font-normal">
                         {item.bedrooms} Bedrooms
                       </p>
                     </div>
 
                     <div className="flex gap-[9px] items-center">
                       <img src={bath} alt="" />
-                      <p className="text-[16px] text-[#666666] font-normal">
+                      <p className="text-[16px] sm:text-[13.5px] text-[#666666] font-normal">
                         {item.bathrooms} Bathrooms
                       </p>
                     </div>
@@ -187,12 +187,12 @@ const MainHome = ({
                 <div className="flex justify-between border-t border-[#E8E8E8] pt-[36.8px]">
                   <div className="flex items-center gap-1  ">
                     <FaNairaSign />
-                    <p className="text-[22px] font-semibold text-[#373737]">
+                    <p className="text-[22px] sm:text-[18px] font-semibold text-[#373737]">
                       {item.price}
                     </p>
                   </div>
 
-                  <div className="flex gap-[25.84px] items-center pt-[3.45px] pr-[5.74px]">
+                  <div className="flex gap-[25.84px] sm:gap-4 items-center pt-[3.45px] pr-[5.74px]">
                     <LuArrowRightLeft className="text-xl text-[#484848]" />
                     <IoShareSocial className="text-xl text-[#484848]" />
                     <button onClick={() => handleFavouriteClick(item._id)}>
@@ -321,7 +321,7 @@ const MainHome = ({
           onClick={closeModal}
         >
           <div
-            className="bg-white rounded-lg sm:p-6 md:max-w-[800px] w-[370px]  md:min-w-[600px]  relative"
+            className="bg-white rounded-lg sm:p-4 md:max-w-[800px] max-w-[350px] w-full  md:min-w-[600px]  relative"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex justify-end items-end mb-4">
