@@ -317,7 +317,7 @@ const MainHome = ({
       {/* ================= Modal ================= */}
        {modalContent && (
         <div
-          className="fixed inset-0  backdrop-blur-sm bg-[#2D2E2ECC]  flex items-center md:justify-center z-50  "
+          className="fixed inset-0  backdrop-blur-sm bg-[#2D2E2ECC]  flex items-center justify-center z-50  "
           onClick={closeModal}
         >
           <div
