@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <div className=" bg-[#035A33] text-[#ffffff] pt-[86.33px] mt-[80.67px]">
-      <div className=" lg:px-[100px] sm:px-[50px] px-6 flex  lg:flex-row flex-col justify-between items-start ">
+      <div className=" lg:px-[100px] sm:px-[50px] px-4 flex  lg:flex-row flex-col justify-between items-start ">
         <div className="lg:w-[379px]">
           <img src={logo} alt="" className="mb-[21px]" />
           <p className="lg:text-[16px] sm:text-[18px] text-[14px] font-normal leading-[160%] gap-[21.25px]">
@@ -90,7 +90,7 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className="mt-[86.67px] border-t border-[#6F6F6F] lg:px-[172px] sm:px-[120px] px-6 flex lg:flex-row flex-col lg:justify-between items-center pt-[36px] gap-4 pb-[56px]">
+      <div className="mt-[86.67px] border-t border-[#6F6F6F] lg:px-[172px] sm:px-[120px] px-4 flex lg:flex-row flex-col lg:justify-between items-center pt-[36px] gap-4 pb-[56px]">
         <p className="lg:text-[14px] sm:text-[18px] text-[13px] font-normal">
           Copyright 2023 Betahouse | Designed by Michael.fig
         </p>

@@ -69,7 +69,7 @@ const MainHome = ({
   };
 
   return (
-    <div className="lg:px-[100px] sm:px-[50px] px-6">
+    <div className="lg:px-[100px] sm:px-[50px] px-4">
       <div className="mt-[72px] flex justify-between items-center pb-5 ">
         <div className="flex md:flex-row flex-col gap-2  md:gap-[29.88px] md:items-center">
           <div className="flex gap-1 items-center">
@@ -96,7 +96,7 @@ const MainHome = ({
       {properties.length === 0 ? (
         <p className="text-center mt-16">No properties found</p>
       ) : (
-        <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-x-[24px] gap-y-[54px]">
+        <div className="grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-x-[24px] gap-y-[54px]">
           {properties.map((item) => (
             <div key={item._id} className="">
               <div
@@ -248,7 +248,7 @@ const MainHome = ({
 
       {/* DISCOVER */}
 
-      <div className="pt-[129.44px] relative flex flex-col gap-[72px]">
+        <div className="pt-[129.44px] relative flex flex-col gap-[72px]">
         <h2 className="font-semibold text-[#0F1A1E] lg:text-[50px]  sm:text-[40px] text-[22px] text-center">
           Discover Our Popular Properties
         </h2>
@@ -260,12 +260,12 @@ const MainHome = ({
         </div>
         <div
           id="popularScroll"
-          className=" gap-[23px] flex relative overflow-x-auto scroll-smooth no-scrollbar "
+          className=" gap-[23px] flex relative overflow-x-auto scroll-smooth no-scrollbar"
         >
           {properties.map((item) => (
             <div
               key={item._id}
-              className="lg:min-w-[290px] sm:min-w-[260px] min-w-[240px] bg-cover bg-center bg-no-repeat h-[412px]  relative rounded-t-[7px]  rounded-b-[4.5px] "
+              className="lg:min-w-[290px] sm:min-w-[260px] min-w-[270px] bg-cover bg-center bg-no-repeat h-[412px]  relative rounded-t-[7px]  rounded-b-[4.5px] "
               style={{
                 backgroundImage: `url(${
                   Array.isArray(item.mainImage)
@@ -304,8 +304,7 @@ const MainHome = ({
             </div>
           ))}
 
-          {/*  */}
-        </div>
+        </div> 
 
         <div
           onClick={scrollRight}
@@ -313,16 +312,16 @@ const MainHome = ({
         >
           <FaLongArrowAltRight className="text-2xl" />
         </div>
-      </div>
+      </div> 
 
       {/* ================= Modal ================= */}
-      {modalContent && (
+       {modalContent && (
         <div
-          className="fixed inset-0  backdrop-blur-sm bg-[#2D2E2ECC]  flex items-center justify-center z-50"
+          className="fixed inset-0  backdrop-blur-sm bg-[#2D2E2ECC]  flex items-center md:justify-center z-50  "
           onClick={closeModal}
         >
           <div
-            className="bg-white rounded-lg p-6 lg:w-[800px] sm:w-[600px] w-[380px]  max-h-[90%] overflow-auto relative"
+            className="bg-white rounded-lg sm:p-6 md:max-w-[800px] w-[370px]  md:min-w-[600px]  relative"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex justify-end items-end mb-4">
@@ -332,20 +331,20 @@ const MainHome = ({
             </div>
 
             {modalContent.type === "gallery" && (
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid sm:grid-cols-2 grid-cols-1 gap-2">
                 {modalContent.data.map((img, idx) => (
                   <img
                     key={idx}
                     src={img}
                     alt={`Gallery ${idx}`}
-                    className="w-full h-[400px] object-cover rounded"
+                    className="w-[350px] md:w-full p-4 md:h-[400px] h-[250px] object-cover rounded"
                   />
                 ))}
               </div>
             )}
 
             {modalContent.type === "video" && (
-              <div className="w-full h-[400px]">
+              <div className="md:w-full p-4 w-[350px] h-[400px]">
                 <iframe
                   width="100%"
                   height="100%"
@@ -361,13 +360,13 @@ const MainHome = ({
             {modalContent.type === "link" && (
               <iframe
                 src={modalContent.data}
-                className="w-full h-[400px]"
+                className="md:w-full p-4 w-[350px] h-[400px]"
                 title="Property Link"
               />
             )}
           </div>
         </div>
-      )}
+      )} 
     </div>
   );
 };

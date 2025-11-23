@@ -21,7 +21,7 @@ const HeroSection = ({
   return (
     <div>
       <div className="flex flex-col  mt-[68.24px]">
-        <div className="lg:ml-[229px] lg:mr-[223px] text-white lg:max-w-[988px] w-full lg:px-[102px] px-6 space-y-[24px] text-center ">
+        <div className="lg:ml-[229px] lg:mr-[223px] text-white lg:max-w-[988px] lg:px-[102px] px-4 space-y-[24px] text-center ">
           <h1 className="lg:text-[64px] sm:text-[50px] text-[29px] font-bold ">
             Browse Our Properties
           </h1>
